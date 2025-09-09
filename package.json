@@ -1,0 +1,33 @@
+{
+  "name": "uploader",
+  "version": "1.0.0",
+  "description": "file uploader site",
+  "homepage": "https://github.com/mutopia7/uploader#readme",
+  "bugs": {
+    "url": "https://github.com/mutopia7/uploader/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mutopia7/uploader.git"
+  },
+  "license": "ISC",
+  "author": "rasool vahid",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.35.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
+}
