@@ -1,0 +1,158 @@
+<!-- Hero / Call to Action Section -->
+<section class="h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 text-center overflow-hidden relative">
+  <!-- Animated background gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-tr from-purple-600 via-pink-500 to-blue-400 opacity-30 animate-gradient bg-[length:400%_400%]"></div>
+
+  <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">
+    Upload your files with ease 🚀
+  </h1>
+  <p class="text-base sm:text-lg mb-8 max-w-md sm:max-w-xl drop-shadow-md">
+    A modern and secure platform to upload and manage your files. 
+    Sign up today and enjoy seamless file sharing.
+  </p>
+  <div class="flex flex-col sm:flex-row gap-4 z-10 relative">
+    <a href="/signup" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-200 transition-transform transform hover:scale-105">
+      Get Started
+    </a>
+    <a href="/login" class="px-6 py-3 border border-white text-white font-semibold rounded-lg shadow-md hover:bg-gray-100 hover:text-blue-600 transition-transform transform hover:scale-105">
+      Login
+    </a>
+  </div>
+</section>
+
+<!-- Features Cards Section -->
+<section class="py-20 px-6 bg-gray-100 dark:bg-gray-900">
+  <div class="max-w-7xl mx-auto text-center mb-12">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Why Choose FileUploader?</h2>
+    <p class="mt-4 text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+      Blazing fast, secure, and beautifully designed for your seamless experience.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-12">
+    <% const features = [
+        {icon:"📂", title:"Upload Any File", desc:"Supports images, videos, documents, and any file type you need."},
+        {icon:"🔒", title:"Secure & Private", desc:"Encrypted storage and advanced security for peace of mind."},
+        {icon:"⚡", title:"Blazing Fast", desc:"Upload and share files instantly with cutting-edge optimization."}
+    ]; %>
+
+    <% features.forEach((f, i) => { %>
+      <div class="feature-card relative rounded-3xl shadow-2xl overflow-hidden cursor-pointer transform transition-transform duration-700 hover:-translate-y-6 hover:scale-105">
+        <div id="particles-<%= i %>" class="absolute inset-0 z-0"></div>
+        <div class="relative z-10 p-8 text-white flex flex-col items-center">
+          <div class="text-6xl mb-4 animate-bounce"><%= f.icon %></div>
+          <h3 class="text-2xl font-bold mb-2"><%= f.title %></h3>
+          <p class="text-sm sm:text-base text-center"><%= f.desc %></p>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<!-- Additional Section: Testimonials -->
+<section class="py-20 px-6 bg-white dark:bg-gray-800 relative overflow-hidden">
+  <div class="max-w-5xl mx-auto text-center mb-12">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">What our users say</h2>
+    <p class="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+      Real feedback from users who love the speed and design of FileUploader.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8">
+    <% const testimonials = [
+      {name:"Alice", text:"Uploading files has never been easier! Love the interface."},
+      {name:"Bob", text:"Super fast and secure, exactly what I needed."},
+      {name:"Charlie", text:"Beautiful animations, very responsive and interactive!"}
+    ]; %>
+
+    <% testimonials.forEach((t,i)=>{ %>
+      <div class="testimonial-card relative rounded-xl shadow-lg p-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white cursor-pointer hover:scale-105 transform transition-transform duration-500">
+        <p class="mb-4 italic">"<%= t.text %>"</p>
+        <span class="font-bold">- <%= t.name %></span>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.1/ScrollTrigger.min.js"></script>
+
+<!-- tsParticles -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.10.1/tsparticles.bundle.min.js"></script>
+
+<script>
+  // Animate cards on scroll
+  gsap.utils.toArray(".feature-card, .testimonial-card").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 80%",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1.2,
+      ease: "power3.out",
+      delay: i * 0.2
+    });
+  });
+
+  // Initialize particles for each feature card
+  function initParticles(id, color) {
+    tsParticles.load(id, {
+      fpsLimit: 60,
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 30, density: { enable: true, area: 800 } },
+        color: { value: color },
+        shape: { type: "circle" },
+        opacity: { value: 0.3, random: true },
+        size: { value: { min: 1, max: 3 } },
+        move: { enable: true, speed: 1, direction: "none", random: true, straight: false, outModes: "out" },
+      },
+      interactivity: { detectsOn: "canvas", events: { onHover: { enable: true, mode: "repulse" } } },
+      detectRetina: true
+    });
+  }
+
+  [0,1,2].forEach(i => initParticles("particles-"+i, "#ffffff"));
+</script>
+
+<!-- Extra styles for glow, hover, gradient animation -->
+<style>
+  /* Feature card style */
+  .feature-card {
+    background: linear-gradient(135deg, rgba(59,130,246,0.85), rgba(139,92,246,0.85), rgba(236,72,153,0.85));
+    backdrop-filter: blur(10px);
+  }
+
+  .feature-card:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  }
+
+  .testimonial-card {
+    background: linear-gradient(135deg, rgba(59,130,246,0.85), rgba(139,92,246,0.85), rgba(236,72,153,0.85));
+    backdrop-filter: blur(8px);
+  }
+
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Animated background gradient overlay */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .animate-gradient {
+    animation: gradientShift 15s ease infinite;
+    background-size: 400% 400%;
+  }
+</style>
