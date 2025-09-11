@@ -8,6 +8,7 @@ import flash from "connect-flash";
 import viewController from "../controllers/viewController.js";
 import userController from "../controllers/userController.js";
 import  signUpvalid from "../validators/signUpValidator.js"
+import { title } from "process";
 
 const router = Router();
 
@@ -99,6 +100,20 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
+// 404 handler
+router.use((req, res, next) => {
+  res.status(404).render("layouts/404", { user: req.user, title: "404" });
+});
 
+// Global error handler
+router.use((err, req, res, next) => {
+  console.error(err.stack); // Server error log
+  res.status(err.status || 500).render("layouts/error", {
+    title: "Error",
+    user: req.user,
+    message: err.message || "Something went wrong on the server.",
+    status: err.status || 500
+  });
+});
 
 export default router;
