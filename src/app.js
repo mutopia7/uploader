@@ -4,6 +4,7 @@ import prisma from "./config/db.js";
 import expressLayouts from "express-ejs-layouts";
 import path from "path";
 import { fileURLToPath } from "url";
+import helmet from "helmet";
 
 import router from "./routes/router.js";
 
@@ -11,21 +12,15 @@ dotenv.config();
 
 const app = express();
 
-
-// // Database connection test
-// app.get("/health", async (req, res) => {
-//   try {
-//     await prisma.$connect();
-//     res.json({ status: "ok", db: "connected" });
-//   } catch (error) {
-//     res.status(500).json({ status: "error", error: error.message });
-//   }
-// });
+// app.use(helmet());
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 // view engine setup
@@ -42,7 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", router)
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on Port:${PORT}`);
 });

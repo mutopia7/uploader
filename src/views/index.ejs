@@ -6,6 +6,7 @@
   <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">
     Upload your files with ease 🚀
   </h1>
+  <% if (!user) { %>
   <p class="text-base sm:text-lg mb-8 max-w-md sm:max-w-xl drop-shadow-md">
     A modern and secure platform to upload and manage your files. 
     Sign up today and enjoy seamless file sharing.
@@ -17,6 +18,7 @@
     <a href="/login" class="px-6 py-3 border border-white text-white font-semibold rounded-lg shadow-md hover:bg-gray-100 hover:text-blue-600 transition-transform transform hover:scale-105">
       Login
     </a>
+  <% } %>
   </div>
 </section>
 
