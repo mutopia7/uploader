@@ -5,7 +5,7 @@ import uploadController from "../controllers/uploadController.js";
 const router = express.Router();
 
 // File storage location
-const upload = multer({ dest: "../uploads/" });
+const upload = multer({ dest: "uploads/" });
 
 
 router.get("/", uploadController.uploadRender)

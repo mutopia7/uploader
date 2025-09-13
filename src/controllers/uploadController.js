@@ -11,7 +11,13 @@ async function createFolder(req, res) {
       parentId: parentId ? parseInt(parentId) : null,
     },
   });
-  res.json(folder);
+  
+  //After creating the folder, redirect to the same page.
+  if (parentId) {
+    res.redirect(`/storage/${parentId}`);
+  } else {
+    res.redirect(`/storage`);
+  }
 };
 
 
@@ -25,7 +31,13 @@ async function uploadFile(req, res) {
       folderId: folderId ? parseInt(folderId) : null,
     },
   });
-  res.json(file);
+  
+  // After uploading the file, redirect it to the same folder.
+  if (folderId) {
+    res.redirect(`/storage/${folderId}`);
+  } else {
+    res.redirect(`/storage`);
+  }
 };
 
 
