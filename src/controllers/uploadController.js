@@ -1,6 +1,12 @@
 import { title } from "process";
 import prisma from "../config/db.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
+// __dirname for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Create a new folder
 async function createFolder(req, res) {
@@ -39,6 +45,30 @@ async function uploadFile(req, res) {
     res.redirect(`/storage`);
   }
 };
+
+
+// Download file
+async function downloadFile(req, res) {
+  const fileId = parseInt(req.params.id);
+
+  const file = await prisma.file.findUnique({
+    where: { id: fileId },
+  });
+
+  if (!file) {
+    return res.status(404).send("File not found");
+  }
+
+  const filePath = path.resolve(file.path);
+
+  // Checking for file existence on disk
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send("File missing on server");
+  }
+
+  res.download(filePath, file.name);
+}
+
 
 
 // Get the contents of a folder (subfolders + files)
@@ -119,11 +149,14 @@ async function uploadRenderWithId(req, res) {
 
 
 
+
+
 export default {
     createFolder,
     uploadFile,
     getFolder,
     getRoot,
     uploadRender,
-    uploadRenderWithId
+    uploadRenderWithId,
+    downloadFile
 }

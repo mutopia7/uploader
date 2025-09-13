@@ -23,4 +23,7 @@ router.get("/folders/:id/contents", uploadController.getFolder);
 // Get the contents of the root (where parentId = null)
 router.get("/root", uploadController.getRoot);
 
+// download file
+router.get("/download/:id", uploadController.downloadFile);
+
 export default router;

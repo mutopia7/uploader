@@ -77,7 +77,7 @@
         <% files.forEach(file => { %>
           <li class="flex items-center gap-2 text-gray-800 dark:text-gray-100 w-full">
             <i class="bi bi-file-earmark-text text-gray-400"></i> <%= file.name %>
-            <a href="/uploads/<%= file.name %>" target="_blank" class="ml-auto text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+            <a href="/storage/download/<%= file.id %>" target="_blank" class="ml-auto text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
               Download
             </a>
           </li>

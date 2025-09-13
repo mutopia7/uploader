@@ -1,0 +1,12 @@
+What is the role of a controller in MVC pattern?;A controller acts as the middleman—coordinating model and view: it handles logic, asks model, selects view, and delegates rendering.
+Name four common response methods in Express.;res.send, res.json, res.redirect, res.render.
+What does `res.send()` do?;It sends a response and auto‑sets Content-Type based on data (string/JSON/object).
+Why use `res.json()` instead of `res.send()`?;It explicitly sends JSON, sets Content-Type JSON, and converts non-object values automatically.
+How do you set status code of a response?;By using `res.status(code)` (e.g. `res.status(404).send(...)`).
+Why order of middleware and routes matters?;Because they are executed in sequence—later handlers won’t run if earlier ones end response.
+What should a controller function accept as arguments?;Two parameters: `req` (request) and `res` (response).
+Where do you store controller modules in a project?;Typically in a separate `controllers/` folder.
+How export multiple controller functions?;Use `module.exports = { func1, func2, ... }`.
+How import and use controller functions in route file?;Use `const controller = require('./controllers/...')` then `controller.funcName` in route.
+What are common use cases for middleware?;Validation, authentication, error handling, logging, parsing.
+Why use error‑handling middleware?;To catch errors gracefully and send formatted responses rather than crashing.
