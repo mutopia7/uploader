@@ -1,50 +1,10 @@
 import { Router } from "express";
-
-import expressSession from 'express-session';
-import { PrismaSessionStore } from '@quixo3/prisma-session-store';
-import  Prisma from '../config/db.js';
 import passport from "../config/passport.js";
-import flash from "connect-flash";
 import viewController from "../controllers/viewController.js";
 import userController from "../controllers/userController.js";
 import  signUpvalid from "../validators/signUpValidator.js"
-import { title } from "process";
 
 const router = Router();
-
-router.use(
-  expressSession({
-    cookie: {
-     maxAge: 7 * 24 * 60 * 60 * 1000 // ms
-    },
-    secret: 'a santa at nasa',
-    resave: true,
-    saveUninitialized: true,
-    store: new PrismaSessionStore(
-      Prisma,
-      {
-        checkPeriod: 2 * 60 * 1000,  //ms
-        dbRecordIdIsSessionId: true,
-        dbRecordIdFunction: undefined,
-      }
-    )
-  })
-);
-
-router.use(passport.initialize());
-router.use(passport.session());
-
-
-// flash
-
-router.use(flash());
-
-// middleware for easy access to flash on all pages
-router.use((req, res, next) => {
-  res.locals.loginErrors = req.flash("loginErrors")[0] || {};
-  res.locals.oldInput = req.flash("oldInput")[0] || {};
-  next();
-});
 
  router.post("/login", (req, res, next) => {
   passport.authenticate("local", function(err, user, info) {
@@ -75,14 +35,6 @@ router.use((req, res, next) => {
   })(req, res, next);
 });
 
-
-router.use((req,res,next) => {
-    res.locals.user = req.user;
-    next()
-})
-
-
-// routes
 
 router.get("/", viewController.indexRender);
 
