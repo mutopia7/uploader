@@ -1,5 +1,7 @@
 # 📸 PhotoUploader
 
+Visit here [PhotoUploader](https://uploader11.vercel.app/)
+
 A modern and secure **Photo Upload & Management** web app built with **Node.js, Express, EJS, Prisma, Passport, Cloudinary, Alpine.js, and TailwindCSS**.  
 Deployed seamlessly with **Vercel**.  
 
@@ -52,7 +54,7 @@ Deployed seamlessly with **Vercel**.
 
 ## 👨‍💻 Author
 Developed with ❤️ by **Rasool**  
-📧 Contact: your.email@example.com  
+📧 Contact: mutopia20@gmail.com  
 🐙 GitHub: [mutopia7](https://github.com/mutopia7)
 
 
