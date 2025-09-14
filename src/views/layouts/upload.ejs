@@ -4,16 +4,20 @@
   <nav class="text-gray-600 dark:text-gray-300 text-sm mb-4" aria-label="Breadcrumb">
     <ol class="list-reset flex gap-2 flex-wrap">
       <li><a href="/storage" class="text-blue-600 hover:underline">Home</a></li>
-      <% breadcrumbs.forEach((crumb, index) => { %>
+      <% breadcrumbs.forEach((crumb, index)=> { %>
         <li>/</li>
         <li>
-          <% if (index === breadcrumbs.length - 1) { %>
-            <span class="text-gray-500 dark:text-gray-400 font-medium"><%= crumb.name %></span>
-          <% } else { %>
-            <a href="/storage/<%= crumb.id %>" class="text-blue-600 hover:underline"><%= crumb.name %></a>
-          <% } %>
+          <% if (index===breadcrumbs.length - 1) { %>
+            <span class="text-gray-500 dark:text-gray-400 font-medium">
+              <%= crumb.name %>
+            </span>
+            <% } else { %>
+              <a href="/storage/<%= crumb.id %>" class="text-blue-600 hover:underline">
+                <%= crumb.name %>
+              </a>
+              <% } %>
         </li>
-      <% }) %>
+        <% }) %>
     </ol>
   </nav>
 
@@ -23,14 +27,9 @@
   <div class="flex flex-col gap-4 mb-6 w-full">
     <!-- New Folder -->
     <form action="/storage/folders" method="POST" class="flex flex-col gap-2 w-full">
-      <input 
-        type="text" 
-        name="name" 
-        placeholder="New folder name..." 
-        required
-        class="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-      />
-      <input type="hidden" name="parentId" value="<%= currentFolderId || '' %>"/>
+      <input type="text" name="name" placeholder="New folder name..." required
+        class="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100" />
+      <input type="hidden" name="parentId" value="<%= currentFolderId || '' %>" />
       <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
         + New Folder
       </button>
@@ -38,53 +37,55 @@
 
     <!-- Upload File -->
     <form action="/storage/files" method="POST" enctype="multipart/form-data" class="flex flex-col gap-2 w-full">
-      <input 
-        type="file" 
-        name="file" 
-        required
-        class="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-gray-100"
-      />
-      <input type="hidden" name="folderId" value="<%= currentFolderId || '' %>"/>
+      <input type="file" name="file" accept="image/*" required class="w-full border border-gray-300 dark:border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2
+      focus:ring-green-500 dark:bg-gray-700 dark:text-gray-100" />
+      <input type="hidden" name="folderId" value="<%= currentFolderId || '' %>" />
       <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
         Upload File
       </button>
     </form>
+    <!-- Upload File -->
   </div>
 
   <!-- Folders List -->
   <div class="mb-6 w-full">
     <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Folders</h2>
-    <% if (folders.length > 0) { %>
+    <% if (folders.length> 0) { %>
       <ul class="space-y-2 w-full">
-        <% folders.forEach(folder => { %>
+        <% folders.forEach(folder=> { %>
           <li>
-            <a href="/storage/<%= folder.id %>" class="flex items-center gap-2 text-gray-800 dark:text-gray-100 hover:underline w-full">
-              <i class="bi bi-folder-fill text-yellow-500"></i> <%= folder.name %>
+            <a href="/storage/<%= folder.id %>"
+              class="flex items-center gap-2 text-gray-800 dark:text-gray-100 hover:underline w-full">
+              <i class="bi bi-folder-fill text-yellow-500"></i>
+              <%= folder.name %>
             </a>
           </li>
-        <% }) %>
+          <% }) %>
       </ul>
-    <% } else { %>
-      <p class="text-gray-500 dark:text-gray-400 italic">No folders yet</p>
-    <% } %>
+      <% } else { %>
+        <p class="text-gray-500 dark:text-gray-400 italic">No folders yet</p>
+        <% } %>
   </div>
 
   <!-- Files List -->
   <div class="w-full">
     <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-100 mb-2">Files</h2>
-    <% if (files.length > 0) { %>
+    <% if (files.length> 0) { %>
       <ul class="space-y-2 w-full">
-        <% files.forEach(file => { %>
+        <% files.forEach(file=> { %>
           <li class="flex items-center gap-2 text-gray-800 dark:text-gray-100 w-full">
-            <i class="bi bi-file-earmark-text text-gray-400"></i> <%= file.name %>
-            <a href="/storage/download/<%= file.id %>" target="_blank" class="ml-auto text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-              Download
-            </a>
+            <i class="bi bi-file-image text-blue-500 text-xl"></i>
+            <%= file.name %>
+              <a href="/storage/download/<%= file.id %>" target="_blank"
+                class="ml-auto text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                Download
+              </a>
           </li>
-        <% }) %>
+          <% }) %>
       </ul>
-    <% } else { %>
-      <p class="text-gray-500 dark:text-gray-400 italic">No files uploaded</p>
-    <% } %>
+      <% } else { %>
+        <p class="text-gray-500 dark:text-gray-400 italic">No files uploaded</p>
+        <% } %>
   </div>
+
 </div>

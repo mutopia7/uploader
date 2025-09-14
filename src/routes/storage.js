@@ -1,11 +1,14 @@
+// routes/storage.js
+
 import express from "express";
 import multer from "multer";
 import uploadController from "../controllers/uploadController.js";
+import { storage } from "../config/cloudinary.js";
 
 const router = express.Router();
 
 // File storage location
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage });
 
 
 router.get("/", uploadController.uploadRender)

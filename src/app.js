@@ -14,6 +14,8 @@ import flash from "connect-flash";
 import router from "./routes/router.js";
 import storageRouter from "./routes/storage.js";
 
+import isAuth from "./middlewares/isAuth.js";
+
 dotenv.config();
 
 const app = express();
@@ -80,7 +82,7 @@ app.set("layout", "./layouts/main");
 app.use(express.static(path.join(__dirname, "public")));
 
 
-app.use("/storage", storageRouter);
+app.use("/storage",isAuth, storageRouter);
 app.use("/", router)
 
 
