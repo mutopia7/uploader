@@ -141,3 +141,4 @@ vite.config.ts.timestamp-*
 
 src/uploads/
 /src/generated/prisma
+.vercel
