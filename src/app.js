@@ -4,7 +4,6 @@ import prisma from "./config/db.js";
 import expressLayouts from "express-ejs-layouts";
 import path from "path";
 import { fileURLToPath } from "url";
-import helmet from "helmet";
 import expressSession from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import Prisma from "./config/db.js";
@@ -20,8 +19,7 @@ dotenv.config();
 
 const app = express();
 
-// app.use(helmet());
-// app.use(helmet())
+
 
 // --- session setup (global) ---
 app.use(
@@ -44,9 +42,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req,res,next) => {
-    res.locals.user = req.user;
-    next()
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next()
 })
 
 
@@ -82,13 +80,13 @@ app.set("layout", "./layouts/main");
 app.use(express.static(path.join(__dirname, "public")));
 
 
-app.use("/storage",isAuth, storageRouter);
+app.use("/storage", isAuth, storageRouter);
 app.use("/", router)
 
 
 
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on Port:${PORT}`);
 });

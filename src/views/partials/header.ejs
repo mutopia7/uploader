@@ -1,4 +1,13 @@
-<header class="flex items-center justify-between p-4 shadow-lg bg-white dark:bg-gray-800">
+<header class="flex items-center justify-between p-4 shadow-lg bg-white dark:bg-gray-800" 
+        x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" 
+        x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val)); 
+                if(darkMode) document.documentElement.classList.add('dark'); 
+                else document.documentElement.classList.remove('dark'); 
+                $watch('darkMode', val => {
+                  if(val) document.documentElement.classList.add('dark');
+                  else document.documentElement.classList.remove('dark');
+                });">
+
   <!-- Logo -->
   <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
     PhotoUploader
@@ -13,6 +22,7 @@
       <a href="/storage" class="hover:text-blue-500 dark:hover:text-blue-300 transition-colors">Upload</a>
       <a href="/logout" class="hover:text-blue-500 dark:hover:text-blue-300 transition-colors">Logout</a>
     <% } %>
+    
     <!-- Dark mode toggle -->
     <button @click="darkMode = !darkMode"
             class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
