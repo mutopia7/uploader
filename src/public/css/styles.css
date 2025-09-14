@@ -28,9 +28,12 @@
 }
 
 .form input {
-    background-color: azure;
+    /* background-color: azure; */
+    background-color: gray;
+    color: white;
     height: 1.8rem;
     padding-left: 10px;
+    border-radius: 5px;
 }
 
 .subBtn {

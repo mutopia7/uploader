@@ -19,7 +19,9 @@
     "dev": "nodemon src/app.js",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "dev:css": "npx @tailwindcss/cli -i ./src/public/css/input.css -o ./src/public/css/output.css --watch"
+    "dev:css": "npx @tailwindcss/cli -i ./src/public/css/input.css -o ./src/public/css/output.css --watch",
+    "build": "tailwindcss -i ./src/public/css/input.css -o ./src/public/css/output.css",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
